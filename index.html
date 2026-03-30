@@ -3,172 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cósmica | Soporte Técnico Remoto</title>
+    <title>Cósmica | Soporte Técnico Remoto y Presencial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050508;
-            --card: #111118;
-            --accent: #00d2ff; /* Cyan Neón */
-            --text: #ffffff;
-            --gray: #a0a0a0;
+            --bg-body: #0a0a0c;
+            --bg-card: #16161a;
+            --text-main: #e6e6e8;
+            --text-muted: #a1a1aa;
+            --accent-cyan: #00e5ff;
+            --accent-purple: #9d4edd;
+            --border: #27272a;
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            line-height: 1.6;
+        /* Reset y Estilos Generales */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            overflow-x: hidden;
         }
-
-        /* Fondo de estrellas simple con CSS */
+        
+        /* Fondo de Estrellas Sutil con Efecto CSS */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(white 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.1;
+            background-image: radial-gradient(#27272a 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
             z-index: -1;
         }
 
-        header {
-            padding: 80px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, #10101a, var(--bg));
+        h1, h2, h3 { font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
+        p { font-weight: 400; color: var(--text-muted); }
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header / Navegación */
+        header { 
+            padding: 20px 0; 
+            border-bottom: 1px solid var(--border); 
+            background-color: rgba(10, 10, 12, 0.8); 
+            backdrop-filter: blur(10px); 
+            position: sticky; top: 0; z-index: 100;
         }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo-img { height: 40px; } /* Ajustá la altura según tu logo */
+        .logo-text { font-size: 1.5rem; color: var(--accent-cyan); letter-spacing: 2px; }
 
-        .logo {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            color: var(--accent);
-            margin: 0;
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+        /* Hero Section */
+        .hero { padding: 120px 0; text-align: center; position: relative; }
+        .hero h1 { 
+            font-size: 4rem; margin-bottom: 20px; 
+            background: linear-gradient(135deg, #fff 0%, #bbb 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--gray);
-            margin-top: 10px;
-            letter-spacing: 2px;
+        .hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 40px; }
+        
+        /* Botones Pro */
+        .btn { 
+            display: inline-flex; align-items: center; gap: 10px; 
+            font-weight: 600; padding: 16px 36px; border-radius: 8px; 
+            transition: 0.3s; 
         }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+        .btn-primary { 
+            background-color: var(--accent-cyan); color: #000; 
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); 
         }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
+        .btn-secondary { background-color: var(--bg-card); border: 1px solid var(--border); color: #fff; }
+        .btn-secondary:hover { border-color: #555; }
 
-        .cta-section {
-            text-align: center;
-            padding: 40px 0;
+        /* Beneficios / Features */
+        .features { padding: 80px 0; border-top: 1px solid var(--border); }
+        .features h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
+        .grid-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feat-card { 
+            background-color: var(--bg-card); padding: 40px; border-radius: 12px; 
+            border: 1px solid var(--border); transition: 0.3s; 
         }
+        .feat-card:hover { border-color: var(--accent-purple); transform: scale(1.02); }
+        .feat-card i { font-size: 2rem; color: var(--accent-purple); margin-bottom: 25px; }
+        .feat-card h3 { margin-bottom: 10px; color: #fff; font-size: 1.4rem; }
 
-        .btn-whatsapp {
-            background: #25d366;
-            color: white;
-            padding: 18px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+        /* Servicios Express (Grid de Iconos) */
+        .services { padding: 80px 0; text-align: center; }
+        .services h2 { margin-bottom: 60px; font-size: 2.5rem; }
+        .grid-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .serv-item { 
+            background-color: var(--bg-card); padding: 30px; border-radius: 8px; 
+            border: 1px solid var(--border); 
         }
+        .serv-item:hover { border-color: var(--accent-cyan); }
+        .serv-item i { font-size: 1.5rem; color: var(--accent-cyan); margin-bottom: 15px; }
 
-        .btn-whatsapp:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-        }
+        /* Clementine Highlight */
+        .clementine { padding: 100px 0; text-align: center; background: radial-gradient(circle at center, #111 0%, #000 70%); }
+        .clementine h2 { color: var(--accent-cyan); margin-bottom: 20px; font-size: 2.5rem; }
+        .clementine p { max-width: 600px; margin: 0 auto; }
 
-        .grid-servicios {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
+        /* Footer */
+        footer { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; }
+        footer p { color: #555; font-size: 0.9rem; margin-top: 10px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; font-size: 1.2rem; color: var(--text-muted); }
+        .social-links a:hover { color: var(--accent-cyan); }
 
-        .card {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #222;
-            transition: 0.3s;
-            text-align: center;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: scale(1.02);
-        }
-
-        .card i {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .card h3 { margin: 10px 0; font-size: 1.5rem; }
-        .card p { color: var(--gray); font-size: 0.95rem; }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            color: #444;
-            font-size: 0.9rem;
-            border-top: 1px solid #111;
-        }
-
-        @media (max-width: 600px) {
-            .logo { font-size: 2.5rem; }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1rem; }
+            .grid-services { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="logo">Cósmica</h1>
-        <p class="tagline">SOLUCIONES INFORMÁTICAS A TU ALCANCE</p>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-link">
+                <img src="cosmica-logo.png" alt="Cósmica Logo" class="logo-img">
+                </a>
+                <a href="https://wa.me/5493883298736" class="btn btn-secondary">CONTACTO</a>
+            </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <section class="cta-section">
-            <p style="font-size: 1.1rem; margin-bottom: 30px; color: #ccc;">
-                Soporte remoto en toda <b>Argentina</b> 🇦🇷 <br> 
-                Atención presencial en <b>San Salvador de Jujuy</b>.
-            </p>
-            <a href="https://wa.me/5493883298736" class="btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> SOLICITAR SOPORTE AHORA
-            </a>
-        </section>
-
-        <div class="grid-servicios">
-            <div class="card">
-                <i class="fas fa-rocket"></i>
-                <h3>Soporte Remoto</h3>
-                <p>Optimizamos tu PC, eliminamos virus e instalamos software sin que salgas de tu casa.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-print"></i>
-                <h3>Reset Epson</h3>
-                <p>Solución profesional a errores de almohadillas y bloqueo de impresoras en el acto.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-microchip"></i>
-                <h3>Clementine PCs</h3>
-                <p>Equipos compactos de alto rendimiento diseñados a medida por Cósmica.</p>
+    <section class="hero">
+        <div class="container">
+            <h1>SOPORTE TÉCNICO AL ALCANCE DE UN CLIC</h1>
+            <p>Soluciones informáticas rápidas, remotas y confiables. Desde virus hasta instalaciones complejas, sin que te muevas de tu casa.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <a href="https://wa.me/5493883298736" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i> SOLICITAR SOPORTE
+                </a>
+                <a href="#beneficios" class="btn btn-secondary">CÓMO FUNCIONA</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="beneficios" class="features">
+        <div class="container">
+            <h2>¿POR QUÉ ELEGIR CÓSMICA?</h2>
+            <div class="grid-features">
+                <div class="feat-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Asistencia Inmediata</h3>
+                    <p>Resolvete el problema en el momento de forma remota, sin esperas ni turnos.</p>
+                </div>
+                <div class="feat-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguridad Garantizada</h3>
+                    <p>Conexión segura y encriptada. Solo accedemos con tu permiso explícito.</p>
+                </div>
+                <div class="feat-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Precio Transparente</h3>
+                    <p>Presupuesto claro antes de empezar. Pagás solo si el problema se resuelve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>NUESTROS SERVICIOS EXPRESS</h2>
+            <div class="grid-services">
+                <div class="serv-item"><i class="fas fa-rocket"></i><p>Optimización PC</p></div>
+                <div class="serv-item"><i class="fas fa-bug"></i><p>Eliminación Virus</p></div>
+                <div class="serv-item"><i class="fas fa-download"></i><p>Instalación Software</p></div>
+                <div class="serv-item"><i class="fas fa-print"></i><p>Reset Epson</p></div>
+                <div class="serv-item"><i class="fas fa-hdd"></i><p>Recupero Datos</p></div>
+                <div class="serv-item"><i class="fas fa-tools"></i><p>Armado de PCs</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clementine">
+        <div class="container">
+            <h2>CLEMENTINE PCs</h2>
+            <p>Nuestra propia línea de equipos compactos y de alto rendimiento. Diseño nacional, potencia cósmica.</p>
+        </div>
+    </section>
 
     <footer>
-        <p>Cósmica &copy; 2026 | San Salvador de Jujuy, Argentina</p>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p>Soporte Remoto Nacional | San Salvador de Jujuy, Argentina</p>
+            <p>&copy; 2026 Cósmica | Todos los derechos reservados.</p>
+        </div>
     </footer>
 
 </body>
